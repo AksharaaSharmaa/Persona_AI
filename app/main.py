@@ -25,8 +25,7 @@ app = FastAPI(
     tags=["storyline"],
 )
 def generate_storyline_endpoint(payload: StorylineRequest) -> StorylineResponse:
-    """Phase 1: zero-input baseline storyline for the selected persona."""
-
+    
     return generate_storyline(payload.persona)
 
 
@@ -36,10 +35,10 @@ def generate_storyline_endpoint(payload: StorylineRequest) -> StorylineResponse:
     summary="Phase 2 - Generate an adaptive 7-day storyline",
     tags=["storyline"],
 )
+
 def generate_storyline_adaptive_endpoint(
     payload: AdaptiveStorylineRequest,
 ) -> StorylineResponse:
-    """Phase 2: adaptive storyline using persona, goal, and previous scenario."""
 
     return generate_storyline_adaptive(
         persona=payload.persona,
@@ -50,7 +49,6 @@ def generate_storyline_adaptive_endpoint(
 
 @app.get("/", include_in_schema=False)
 def root() -> dict[str, str]:
-    """Simple health/info endpoint."""
 
     return {
         "message": "Persona-Based Storyline API (Phase 1 & 2). Visit /docs for interactive API docs."
